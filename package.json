@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:full": "concurrently \"npm run dev\" \"npm --prefix server run dev\"",
-    "build": "vite build",
+    "build": "vite build && node scripts/copyDistToServer.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
