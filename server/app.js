@@ -10,8 +10,14 @@ import { CLIENT_ORIGIN } from "./utils/config.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const distPath = path.resolve(__dirname, "../dist");
-const distIndexPath = path.join(distPath, "index.html");
+const distCandidates = [
+	path.resolve(__dirname, "dist"),
+	path.resolve(__dirname, "../dist"),
+];
+const distPath = distCandidates.find((candidate) =>
+	existsSync(path.join(candidate, "index.html"))
+);
+const distIndexPath = distPath ? path.join(distPath, "index.html") : null;
 
 app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.json());
@@ -21,7 +27,7 @@ app.get("/api/health", contactController.healthCheck);
 app.get("/api/contacts", contactController.getContacts);
 app.post("/api/contact", contactController.createContactMessage);
 
-if (existsSync(distIndexPath)) {
+if (distPath && distIndexPath) {
 	app.use(express.static(distPath));
 
 	app.get("/{*path}", (req, res, next) => {
