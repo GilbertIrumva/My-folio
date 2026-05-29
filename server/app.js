@@ -31,6 +31,13 @@ if (existsSync(distIndexPath)) {
 
 		return res.sendFile(distIndexPath);
 	});
+} else {
+	app.get("/", (_req, res) => {
+		res.json({
+			ok: true,
+			message: "API is running. Frontend build files were not found on this instance.",
+		});
+	});
 }
 
 app.use(middleware.unknownEndpoint);

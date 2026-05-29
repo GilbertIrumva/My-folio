@@ -75,6 +75,14 @@ const ContactMe = () => {
               <a href="mailto:gilbertirumva25@gmail.com">gilbertirumva25@gmail.com</a>
             </li>
             <li>
+              <span className="contact-label">Phone 1</span>
+              <a href="tel:+254757003887">+254 757 00 38 87</a>
+            </li>
+            <li>
+              <span className="contact-label">Phone 2</span>
+              <a href="tel:+254140449904">+254 140 44 99 04</a>
+            </li>
+            <li>
               <span className="contact-label">Location</span>
               <span>Nairobi, Kenya</span>
             </li>
