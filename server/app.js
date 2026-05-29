@@ -10,9 +10,12 @@ import { CLIENT_ORIGIN } from "./utils/config.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const cwd = process.cwd();
 const distCandidates = [
 	path.resolve(__dirname, "dist"),
 	path.resolve(__dirname, "../dist"),
+	path.resolve(cwd, "server/dist"),
+	path.resolve(cwd, "dist"),
 ];
 const distPath = distCandidates.find((candidate) =>
 	existsSync(path.join(candidate, "index.html"))
