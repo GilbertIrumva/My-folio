@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-folio
+    name: gilbert-portfolio
     runtime: node
     plan: free
     region: oregon
