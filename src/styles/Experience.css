@@ -1,0 +1,49 @@
+.experience-section {
+  background: var(--color-bg);
+}
+
+.timeline {
+  display: grid;
+  gap: 16px;
+}
+
+.timeline-item {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.timeline-period {
+  font-size: 13px;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.timeline-item h3 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.timeline-company {
+  color: var(--color-text);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.timeline-details {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.timeline-highlights {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-highlights li {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}

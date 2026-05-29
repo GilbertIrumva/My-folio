@@ -33,7 +33,53 @@
 }
 
 .skill-icon {
-  font-size: 20px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.skill-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.skill-icon-react {
+  color: #61dafb;
+}
+
+.skill-icon-javascript {
+  color: #f7df1e;
+}
+
+.skill-icon-node {
+  color: #62b347;
+}
+
+.skill-icon-typescript {
+  color: #3178c6;
+}
+
+.skill-icon-css {
+  color: #264de4;
+}
+
+.skill-icon-mongo {
+  color: #00ed64;
+}
+
+.skill-icon-git {
+  color: #f05033;
+}
+
+.skill-icon-api {
+  color: var(--color-accent);
 }
 
 .skill-name {

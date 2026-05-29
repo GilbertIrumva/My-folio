@@ -6,8 +6,8 @@ const AboutMe = () => {
       <div className="about-header">
         <span className="eyebrow">About Me</span>
         <h2 className="section-heading">
-          Crafting digital experiences with{" "}
-          <span className="gradient-text">passion & precision</span>
+          Product engineering for{" "}
+          <span className="gradient-text">clarity and impact</span>
         </h2>
       </div>
 
@@ -15,19 +15,20 @@ const AboutMe = () => {
         <div className="about-card">
           <h3>Who I am</h3>
           <p>
-            I&apos;m Gilbert, a full-stack developer passionate about building
-            performant, accessible, and beautifully designed web products. I
-            bridge the gap between design and engineering with a focus on
-            clean, maintainable code.
+            I&apos;m Gilbert, a full-stack developer who builds reliable web
+            products that balance user experience, performance, and business
+            goals. I care about clear architecture, thoughtful UI decisions,
+            and maintainable code that teams can scale.
           </p>
         </div>
 
         <div className="about-card">
           <h3>What I do</h3>
           <p>
-            I design and build modern web applications using React, Node.js,
-            and scalable API architectures. From idea to deployment, I love
-            turning complex problems into intuitive solutions.
+            I design and deliver modern applications with React, Node.js, and
+            scalable API architecture. From discovery to deployment, I turn
+            product requirements into fast, accessible, and production-ready
+            solutions.
           </p>
         </div>
 

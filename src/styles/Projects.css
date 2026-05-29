@@ -1,0 +1,57 @@
+.projects-section {
+  background: var(--color-bg);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: grid;
+  gap: 12px;
+}
+
+.project-card h3 {
+  font-size: 20px;
+}
+
+.project-card p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.project-achievements {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.project-achievements li {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.project-stack {
+  font-size: 13px;
+  color: var(--color-accent);
+}
+
+.project-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+}

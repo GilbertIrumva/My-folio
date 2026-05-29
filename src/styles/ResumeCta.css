@@ -1,0 +1,43 @@
+.resume-section {
+  background: var(--color-bg);
+}
+
+.resume-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.resume-card p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.resume-outline {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .resume-card {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-actions {
+    justify-content: flex-start;
+  }
+}

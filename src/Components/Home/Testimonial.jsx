@@ -27,7 +27,7 @@ const Testimonial = () => {
       <div className="section-header">
         <span className="eyebrow">Testimonials</span>
         <h2 className="section-heading">
-          What people <span className="gradient-text">say about me</span>
+          Client feedback on <span className="gradient-text">delivery and results</span>
         </h2>
       </div>
 

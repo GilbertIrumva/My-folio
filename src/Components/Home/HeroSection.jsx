@@ -30,8 +30,8 @@ const HeroSection = () => {
 
       <div className="hero-section-img">
         <img
-          src="https://images.unsplash.com/photo-1581090700227-1e8e4d2bcfd1?auto=format&fit=crop&w=900&q=80"
-          alt="Developer working at a laptop, surrounded by code, embodying professional web development expertise."
+          src="/Reagan.png"
+          alt="Reagan portrait"
         />
       </div>
     </section>

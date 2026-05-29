@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: my-folio
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm --prefix server install && npm run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: CONTACT_RECEIVER_EMAIL
+        sync: false
