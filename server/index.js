@@ -42,13 +42,6 @@ mongoose.connection.on("reconnected", () => {
 });
 
 const startServer = async () => {
-  if (!MONGODB_URI) {
-    logger.error("MONGODB_URI is missing. Please configure it in your .env file.");
-    process.exit(1);
-  }
-
-  await connectWithRetry();
-
   if (!GMAIL_USER || !GMAIL_APP_PASSWORD || !CONTACT_RECEIVER_EMAIL) {
     logger.warn("Gmail notifier is not fully configured. Set GMAIL_USER, GMAIL_APP_PASSWORD, and CONTACT_RECEIVER_EMAIL.");
   }
@@ -59,6 +52,15 @@ const startServer = async () => {
     });
     serverStarted = true;
   }
+
+  if (!MONGODB_URI) {
+    logger.warn("MONGODB_URI is missing. Starting API without database persistence; email delivery can still work.");
+    return;
+  }
+
+  connectWithRetry().catch((error) => {
+    logger.error("Unexpected MongoDB retry loop failure:", error);
+  });
 };
 
 startServer();
