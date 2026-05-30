@@ -9,6 +9,7 @@ import {
 import logger from "../utils/logger.js";
 
 const MAIL_TIMEOUT_MS = 20000;
+const DB_TIMEOUT_MS = 8000;
 
 const mailTransporter =
   GMAIL_USER && GMAIL_APP_PASSWORD
@@ -75,7 +76,6 @@ const createContactMessage = async (req, res) => {
 
   try {
     const mongoReady = mongoose.connection.readyState === 1;
-    let savedToDb = false;
     let deliveredByEmail = false;
 
     if (emailReady) {
@@ -108,35 +108,27 @@ const createContactMessage = async (req, res) => {
       );
     }
 
-    if (mongoReady) {
-      try {
-        await Contact.create({ name, email, message });
-        savedToDb = true;
-      } catch (dbError) {
-        logger.warn("MongoDB write failed after email delivery attempt.", dbError);
+    if (deliveredByEmail) {
+      if (mongoReady) {
+        void (async () => {
+          try {
+            await withTimeout(
+              Contact.create({ name, email, message }),
+              DB_TIMEOUT_MS,
+              "Database write timeout."
+            );
+          } catch (dbError) {
+            logger.warn("MongoDB write failed after email delivery attempt.", dbError);
+          }
+        })();
+      } else {
+        logger.warn(
+          "MongoDB is unavailable. Skipping database save while preserving email delivery."
+        );
       }
-    } else {
-      logger.warn(
-        "MongoDB is unavailable. Skipping database save while preserving email delivery."
-      );
-    }
 
-    if (savedToDb && deliveredByEmail) {
       return res.status(200).json({
-        message: "Thank you for reaching out. Your message was saved and sent successfully.",
-      });
-    }
-
-    if (savedToDb && !deliveredByEmail) {
-      return res.status(200).json({
-        message: "Thanks for your message. It was saved successfully.",
-      });
-    }
-
-    if (!savedToDb && deliveredByEmail) {
-      return res.status(200).json({
-        message:
-          "Thanks for reaching out. Your message was emailed successfully, but database storage is temporarily unavailable.",
+        message: "Thanks for reaching out. Your message was emailed successfully.",
       });
     }
 

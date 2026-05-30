@@ -52,21 +52,20 @@ const ContactMe = () => {
           body: JSON.stringify(form),
           signal: controller.signal,
         });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data?.message || "Unable to send your message right now.");
+        }
+
+        setStatus({
+          type: "success",
+          text: data?.message || "Thanks! Your message was delivered and we will get back to you as soon as possible.",
+        });
+        setForm({ name: "", email: "", message: "" });
       } finally {
         window.clearTimeout(timeoutId);
       }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Unable to send your message right now.");
-      }
-
-      setStatus({
-        type: "success",
-        text: data?.message || "Thanks! Your message was delivered and we will get back to you as soon as possible.",
-      });
-      setForm({ name: "", email: "", message: "" });
     } catch (error) {
       setStatus({
         type: "error",
