@@ -5,7 +5,7 @@ Modern portfolio project built with React + Vite, now configured with an Express
 ## Tech Stack
 
 - Frontend: React, Vite, CSS
-- Backend: Express, MongoDB (Mongoose), Nodemailer, CORS, dotenv
+- Backend: Express, MongoDB (Mongoose), Nodemailer, dotenv
 - Tooling: ESLint, nodemon, concurrently
 
 ## Project Structure
@@ -60,12 +60,11 @@ Backend scripts (run inside `server/`):
 ## API Endpoints
 
 - `GET /api/health`: Health check + MongoDB/email readiness
-- `POST /api/contact`: Accepts `{ name, email, message }`, stores it in MongoDB, and sends it to your Gmail inbox
+- `POST /api/contact`: Accepts `{ name, email, message }`, sends it to your Gmail inbox first, and stores it in MongoDB when available
 
 ## Environment Variables
 
 - `PORT`: Backend port (default `5000`)
-- `CLIENT_ORIGIN`: Allowed CORS origin (default `http://localhost:5173`)
 - `VITE_API_BASE_URL`: Optional frontend API base URL for production deployments
 - `MONGODB_URI`: MongoDB connection string
 - `GMAIL_USER`: Gmail sender account (for example `you@gmail.com`)
