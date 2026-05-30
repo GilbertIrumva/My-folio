@@ -59,19 +59,6 @@ const createContactMessage = async (req, res) => {
     let savedToDb = false;
     let deliveredByEmail = false;
 
-    if (mongoReady) {
-      try {
-        await Contact.create({ name, email, message });
-        savedToDb = true;
-      } catch (dbError) {
-        logger.warn("MongoDB write failed. Proceeding with email delivery attempt.", dbError);
-      }
-    } else {
-      logger.warn(
-        "MongoDB is unavailable. Skipping database save and attempting email delivery."
-      );
-    }
-
     if (emailReady) {
       const result = await mailTransporter.sendMail({
         from: `My Folio Contact <${GMAIL_USER}>`,
@@ -95,6 +82,19 @@ const createContactMessage = async (req, res) => {
     if (!emailReady) {
       logger.warn(
         "Email delivery skipped: Gmail notifier is not fully configured."
+      );
+    }
+
+    if (mongoReady) {
+      try {
+        await Contact.create({ name, email, message });
+        savedToDb = true;
+      } catch (dbError) {
+        logger.warn("MongoDB write failed after email delivery attempt.", dbError);
+      }
+    } else {
+      logger.warn(
+        "MongoDB is unavailable. Skipping database save while preserving email delivery."
       );
     }
 

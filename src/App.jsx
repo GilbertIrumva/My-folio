@@ -16,10 +16,19 @@ const App = () => {
   useEffect(() => {
     const sections = document.querySelectorAll("main section");
 
+    if (!sections.length) {
+      return undefined;
+    }
+
     sections.forEach((section, index) => {
       section.classList.add("reveal-section");
       section.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
     });
+
+    if (typeof window.IntersectionObserver === "undefined") {
+      sections.forEach((section) => section.classList.add("is-visible"));
+      return undefined;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

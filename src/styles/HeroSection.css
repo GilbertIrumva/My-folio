@@ -52,9 +52,9 @@
 }
 
 .section-title {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-size: clamp(0.78rem, 0.73rem + 0.25vw, 0.94rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 14px;
@@ -63,10 +63,11 @@
 .hero-section-title {
   font-size: clamp(36px, 5.5vw, 64px);
   font-weight: 800;
-  line-height: 1.05;
+  line-height: 1.02;
   margin-bottom: 22px;
   color: var(--color-text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .hero-section-title-color {
@@ -77,8 +78,9 @@
 }
 
 .hero-section-description {
-  font-size: 16px;
-  line-height: 1.75;
+  font-size: clamp(1rem, 0.97rem + 0.18vw, 1.09rem);
+  line-height: 1.78;
+  max-width: 58ch;
   color: var(--color-text-muted);
   margin-bottom: 32px;
 }

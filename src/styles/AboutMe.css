@@ -5,17 +5,19 @@
 .eyebrow {
   display: inline-block;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 12px;
+  letter-spacing: 0.16em;
+  font-size: clamp(0.72rem, 0.69rem + 0.16vw, 0.82rem);
   font-weight: 700;
   color: var(--color-accent);
   margin-bottom: 12px;
 }
 
 .section-heading {
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(1.88rem, 1.45rem + 2.15vw, 2.8rem);
   font-weight: 800;
-  line-height: 1.2;
+  letter-spacing: -0.022em;
+  line-height: 1.12;
+  text-wrap: balance;
   max-width: 760px;
 }
 
@@ -44,12 +46,9 @@
 
 .about-media-hero {
   position: relative;
-  border-radius: 42px;
-  padding: 12px;
-  background:
-    radial-gradient(circle at 18% 20%, rgba(34, 211, 238, 0.22), transparent 40%),
-    radial-gradient(circle at 78% 85%, rgba(108, 140, 255, 0.24), transparent 50%),
-    var(--color-surface);
+  border-radius: 25px;
+  padding: 22px 0 12px;
+  background: #000;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
     0 0 0 8px rgba(var(--color-bg-rgb), 0.2),
@@ -60,9 +59,10 @@
   width: 100%;
   min-height: 300px;
   max-height: 390px;
-  object-fit: cover;
-  object-position: center center;
-  border-radius: 34px;
+  object-fit: contain;
+  object-position: center top;
+  background: rgba(var(--color-bg-rgb), 0.35);
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
   transition: transform 0.35s ease;
@@ -169,7 +169,7 @@
   .about-media-main {
     min-height: 245px;
     max-height: none;
-    object-position: center 18%;
+    object-position: center top;
   }
 
   .about-media-stack img {

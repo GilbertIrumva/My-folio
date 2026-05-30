@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap");
 
 /* Global Styles */
 *,
@@ -26,6 +26,11 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --max-width: 1200px;
+  --font-size-base: 16.5px;
+  --line-height-base: 1.68;
+  --h1-size: clamp(2.05rem, 1.65rem + 2vw, 3.15rem);
+  --h2-size: clamp(1.62rem, 1.35rem + 1.35vw, 2.35rem);
+  --h3-size: clamp(1.25rem, 1.15rem + 0.6vw, 1.55rem);
 }
 
 :root[data-theme="light"] {
@@ -56,7 +61,10 @@ body {
   padding: 0;
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -86,7 +94,25 @@ img {
 h1,
 h2,
 h3 {
-  font-family: "Sora", "Space Grotesk", sans-serif;
+  font-family: "Outfit", "Manrope", sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--h3-size);
+  font-weight: 600;
 }
 
 button {
@@ -132,6 +158,12 @@ section {
 }
 
 @media (max-width: 768px) {
+  html,
+  body {
+    --font-size-base: 16px;
+    letter-spacing: 0.005em;
+  }
+
   section {
     padding: 60px 6%;
   }

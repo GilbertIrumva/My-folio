@@ -40,8 +40,10 @@
 
 .testimonial-quote {
   color: var(--color-text);
-  line-height: 1.7;
-  font-size: 15px;
+  line-height: 1.78;
+  font-size: clamp(0.98rem, 0.95rem + 0.16vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.005em;
 }
 
 .testimonial-author {
@@ -59,11 +61,13 @@
 }
 
 .author-name {
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--color-text);
 }
 
 .author-role {
-  font-size: 13px;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: var(--color-text-muted);
 }
