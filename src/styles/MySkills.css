@@ -6,6 +6,17 @@
   margin-bottom: 50px;
 }
 
+.skills-banner {
+  width: 100%;
+  height: 232px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-md);
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -105,4 +116,10 @@
   background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
   border-radius: 999px;
   transition: width 0.8s ease;
+}
+
+@media (max-width: 768px) {
+  .skills-banner {
+    height: 192px;
+  }
 }

@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect } from "react";
 import Navbar from "./Components/Home/Navbar";
 import HeroSection from "./Components/Home/HeroSection";
 import AboutMe from "./Components/Home/AboutMe";
@@ -12,6 +13,31 @@ import ContactMe from "./Components/Home/ContactMe";
 import Footer from "./Components/Home/Footer";
 
 const App = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll("main section");
+
+    sections.forEach((section, index) => {
+      section.classList.add("reveal-section");
+      section.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Navbar />

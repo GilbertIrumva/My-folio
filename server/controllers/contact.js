@@ -19,6 +19,8 @@ const mailTransporter =
       })
     : null;
 
+const emailReady = Boolean(mailTransporter && CONTACT_RECEIVER_EMAIL);
+
 const escapeHtml = (value = "") =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -32,7 +34,7 @@ const healthCheck = (_req, res) => {
     ok: true,
     service: "my-folio-backend",
     mongo: mongoose.connection.readyState === 1,
-    email: Boolean(mailTransporter && CONTACT_RECEIVER_EMAIL),
+    email: emailReady,
   });
 };
 
@@ -40,25 +42,38 @@ const createContactMessage = async (req, res) => {
   const { name, email, message } = req.body || {};
 
   if (!name || !email || !message) {
-    return res.status(400).json({ message: "Name, email, and message are required." });
+    return res.status(400).json({
+      message: "Please fill in your name, email, and message before submitting.",
+    });
   }
 
   const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!emailIsValid) {
-    return res.status(400).json({ message: "Please provide a valid email address." });
-  }
-
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({
-      message: "Contact service is temporarily unavailable. Please try again in a moment.",
+    return res.status(400).json({
+      message: "Please enter a valid email address so I can reply to you.",
     });
   }
 
   try {
-    await Contact.create({ name, email, message });
+    const mongoReady = mongoose.connection.readyState === 1;
+    let savedToDb = false;
+    let deliveredByEmail = false;
 
-    if (mailTransporter && CONTACT_RECEIVER_EMAIL) {
-      await mailTransporter.sendMail({
+    if (mongoReady) {
+      try {
+        await Contact.create({ name, email, message });
+        savedToDb = true;
+      } catch (dbError) {
+        logger.warn("MongoDB write failed. Proceeding with email delivery attempt.", dbError);
+      }
+    } else {
+      logger.warn(
+        "MongoDB is unavailable. Skipping database save and attempting email delivery."
+      );
+    }
+
+    if (emailReady) {
+      const result = await mailTransporter.sendMail({
         from: `My Folio Contact <${GMAIL_USER}>`,
         to: CONTACT_RECEIVER_EMAIL,
         replyTo: email,
@@ -72,16 +87,45 @@ const createContactMessage = async (req, res) => {
           <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
         `,
       });
+
+      logger.info("Contact email delivered successfully:", result.messageId);
+      deliveredByEmail = true;
     }
 
-    return res.status(200).json({
-      message: "Thanks! Your message was received and sent to my inbox.",
+    if (!emailReady) {
+      logger.warn(
+        "Email delivery skipped: Gmail notifier is not fully configured."
+      );
+    }
+
+    if (savedToDb && deliveredByEmail) {
+      return res.status(200).json({
+        message: "Thank you for reaching out. Your message was saved and sent successfully.",
+      });
+    }
+
+    if (savedToDb && !deliveredByEmail) {
+      return res.status(200).json({
+        message: "Thanks for your message. It was saved successfully.",
+      });
+    }
+
+    if (!savedToDb && deliveredByEmail) {
+      return res.status(200).json({
+        message:
+          "Thanks for reaching out. Your message was emailed successfully, but database storage is temporarily unavailable.",
+      });
+    }
+
+    return res.status(503).json({
+      message: "Contact service is temporarily unavailable. Please try again shortly.",
     });
   } catch (error) {
     logger.error("Failed to process contact submission:", error);
 
     return res.status(500).json({
-      message: "Unable to send your message right now. Please try again later.",
+      message:
+        "Something went wrong while sending your message. Please try again in a few minutes.",
     });
   }
 };

@@ -5,6 +5,7 @@ const experiences = [
     period: "Jan 2024 - Present",
     role: "Full-Stack Developer",
     company: "Freelance / Product Projects",
+    image: "/images/experience-freelance.webp",
     details:
       "Deliver end-to-end web products for clients and personal initiatives, from requirements and UI implementation to backend APIs and deployment.",
     highlights: [
@@ -16,6 +17,7 @@ const experiences = [
     period: "May 2023 - Dec 2023",
     role: "Frontend Developer",
     company: "Digital Product Team",
+    image: "/images/experience-frontend.webp",
     details:
       "Built responsive user interfaces and collaborated with design and backend teams to deliver consistent product experiences.",
     highlights: [
@@ -27,6 +29,7 @@ const experiences = [
     period: "Jan 2022 - Apr 2023",
     role: "Software Developer Intern",
     company: "Engineering Internship Program",
+    image: "/images/experience-intern.webp",
     details:
       "Supported feature delivery across frontend and backend tasks while building strong fundamentals in production workflows.",
     highlights: [
@@ -49,6 +52,7 @@ const Experience = () => {
       <div className="timeline">
         {experiences.map((item) => (
           <article key={`${item.period}-${item.role}`} className="timeline-item">
+            <img src={item.image} loading="lazy" decoding="async" alt={`${item.role} work visual`} />
             <p className="timeline-period">{item.period}</p>
             <h3>{item.role}</h3>
             <p className="timeline-company">{item.company}</p>

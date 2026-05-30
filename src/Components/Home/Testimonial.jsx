@@ -2,20 +2,23 @@ import "../../styles/Testimonial.css";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "Product Manager, Acme Inc.",
+    name: "Ramazani Mwemedi",
+    role: "Co-founder and CEO of Opengates, a platform empowering youth through scalable and secure technologies.",
+    avatar: "/images/Rama.jpg",
     quote:
       "Gilbert delivered our platform ahead of schedule with exceptional polish. His attention to UX detail is rare and refreshing.",
   },
   {
-    name: "David Kim",
-    role: "CTO, NovaLabs",
+    name: "Fazili Ndarabu Nathanael",
+    role: "FabLab Manager | STEM & Social Innovation Advocate",
+    avatar: "/images/Fazili.jpg",
     quote:
       "Reliable, communicative, and technically sharp. Gilbert ramped up on our codebase faster than anyone we've hired.",
   },
   {
     name: "Aïsha Ndiaye",
     role: "Founder, Bloomly",
+    avatar: "/images/testimonial-aisha.webp",
     quote:
       "He turned our messy MVP into a production-ready product. The code is clean and the UI feels premium.",
   },
@@ -36,9 +39,13 @@ const Testimonial = () => {
           <article key={t.name} className="testimonial-card">
             <p className="testimonial-quote">&ldquo;{t.quote}&rdquo;</p>
             <div className="testimonial-author">
-              <div className="avatar" aria-hidden="true">
-                {t.name.charAt(0)}
-              </div>
+              <img
+                className="avatar"
+                src={t.avatar}
+                loading="lazy"
+                decoding="async"
+                alt={`${t.name} profile`}
+              />
               <div>
                 <p className="author-name">{t.name}</p>
                 <p className="author-role">{t.role}</p>

@@ -54,11 +54,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  color: var(--color-on-accent);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  object-fit: cover;
+  border: 2px solid var(--color-border);
 }
 
 .author-name {

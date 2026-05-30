@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import contactController from "./controllers/contact.js";
 import middleware from "./utils/middleware.js";
-import { CLIENT_ORIGIN } from "./utils/config.js";
+import { CLIENT_ORIGINS } from "./utils/config.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +22,17 @@ const distPath = distCandidates.find((candidate) =>
 );
 const distIndexPath = distPath ? path.join(distPath, "index.html") : null;
 
-app.use(cors({ origin: CLIENT_ORIGIN }));
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (!origin || CLIENT_ORIGINS.includes(origin)) {
+			return callback(null, true);
+		}
+
+		return callback(new Error(`Origin ${origin} is not allowed by CORS.`));
+	},
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(middleware.requestLogger);
 

@@ -4,6 +4,14 @@ const ResumeCta = () => {
   return (
     <section id="Resume" className="resume-section">
       <div className="resume-card">
+        <img
+          className="resume-visual"
+          src="/images/resume-visual.webp"
+          loading="lazy"
+          decoding="async"
+          alt="Professional discussion over laptop and resume materials"
+        />
+
         <div>
           <span className="eyebrow">Resume + CTA</span>
           <h2 className="section-heading">
@@ -23,7 +31,7 @@ const ResumeCta = () => {
           </a>
           <a
             className="btn resume-outline"
-            href="https://www.linkedin.com/in/gilbert-irumva"
+            href="https://scheduler.zoom.us/gilbert-irumva/portfolio-intro-call"
             target="_blank"
             rel="noreferrer"
           >

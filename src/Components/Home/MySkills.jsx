@@ -95,6 +95,14 @@ const MySkills = () => {
         </h2>
       </div>
 
+      <img
+        className="skills-banner"
+        src="/images/skills-banner.webp"
+        loading="lazy"
+        decoding="async"
+        alt="Developer workflow across multiple displays"
+      />
+
       <div className="skills-grid">
         {skills.map((skill) => (
           <div key={skill.name} className="skill-card">

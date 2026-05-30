@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/ContactMe.css";
+
+const SUCCESS_MESSAGE_TIMEOUT_MS = 4000;
 
 const ContactMe = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "";
+
+  useEffect(() => {
+    if (status?.type !== "success") {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setStatus(null);
+    }, SUCCESS_MESSAGE_TIMEOUT_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [status]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -63,6 +77,13 @@ const ContactMe = () => {
 
       <div className="contact-grid">
         <div className="contact-info">
+          <img
+            className="contact-visual"
+            src="/images/contact-visual.webp"
+            loading="lazy"
+            decoding="async"
+            alt="Desk setup with notebook and laptop for client collaboration"
+          />
           <h3>Get in touch</h3>
           <p>
             Have a project in mind, an opportunity, or just want to say hi?

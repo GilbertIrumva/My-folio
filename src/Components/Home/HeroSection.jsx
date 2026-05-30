@@ -3,7 +3,7 @@ import "../../styles/HeroSection.css";
 const HeroSection = () => {
   return (
     <section id="herosection" className="hero-section">
-      <div className="hero-section-content-box">
+      <div className="hero-section-content-box hero-reveal-copy">
         <div className="hero-section-content">
           <p className="section-title">Hey, I&apos;m Gilbert</p>
 
@@ -28,10 +28,12 @@ const HeroSection = () => {
         </a>
       </div>
 
-      <div className="hero-section-img">
+      <div className="hero-section-img hero-reveal-photo">
         <img
-          src="/Reagan.png"
-          alt="Reagan portrait"
+          src="/webdev.jpg"
+          loading="eager"
+          decoding="async"
+          alt="Portrait of Gilbert working in a studio setup"
         />
       </div>
     </section>

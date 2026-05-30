@@ -3,6 +3,7 @@ import "../../styles/Projects.css";
 const projects = [
   {
     title: "Full-Stack Portfolio Platform",
+    image: "/images/project-portfolio.webp",
     summary:
       "Designed and launched a personal brand website to showcase technical depth, credibility, and hiring readiness through a modern full-stack experience.",
     achievements: [
@@ -15,6 +16,7 @@ const projects = [
   },
   {
     title: "E-Commerce Operations Dashboard",
+    image: "/images/project-dashboard.webp",
     summary:
       "Built an internal dashboard for order tracking, inventory visibility, and support workflows to help operations teams resolve issues faster.",
     achievements: [
@@ -27,6 +29,7 @@ const projects = [
   },
   {
     title: "Client Reporting Automation Tool",
+    image: "/images/project-reporting.webp",
     summary:
       "Created an automated reporting workflow that collects campaign data, generates stakeholder-ready summaries, and distributes reports on schedule.",
     achievements: [
@@ -52,6 +55,12 @@ const Projects = () => {
       <div className="projects-grid">
         {projects.map((project) => (
           <article key={project.title} className="project-card">
+            <img
+              src={project.image}
+              loading="lazy"
+              decoding="async"
+              alt={`${project.title} preview`}
+            />
             <h3>{project.title}</h3>
             <p>{project.summary}</p>
             {project.achievements && project.achievements.length > 0 && (
