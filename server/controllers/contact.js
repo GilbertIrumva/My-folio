@@ -8,6 +8,8 @@ import {
 } from "../utils/config.js";
 import logger from "../utils/logger.js";
 
+const MAIL_TIMEOUT_MS = 20000;
+
 const mailTransporter =
   GMAIL_USER && GMAIL_APP_PASSWORD
     ? nodemailer.createTransport({
@@ -16,6 +18,9 @@ const mailTransporter =
           user: GMAIL_USER,
           pass: GMAIL_APP_PASSWORD,
         },
+        connectionTimeout: MAIL_TIMEOUT_MS,
+        greetingTimeout: MAIL_TIMEOUT_MS,
+        socketTimeout: MAIL_TIMEOUT_MS,
       })
     : null;
 
@@ -28,6 +33,20 @@ const escapeHtml = (value = "") =>
     .replace(/>/g, "&gt;")
     .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
+
+const withTimeout = async (promise, timeoutMs, timeoutMessage) => {
+  let timeoutId;
+
+  try {
+    const timeoutPromise = new Promise((_, reject) => {
+      timeoutId = setTimeout(() => reject(new Error(timeoutMessage)), timeoutMs);
+    });
+
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
 
 const healthCheck = (_req, res) => {
   res.json({
@@ -60,20 +79,24 @@ const createContactMessage = async (req, res) => {
     let deliveredByEmail = false;
 
     if (emailReady) {
-      const result = await mailTransporter.sendMail({
-        from: `My Folio Contact <${GMAIL_USER}>`,
-        to: CONTACT_RECEIVER_EMAIL,
-        replyTo: email,
-        subject: `New portfolio message from ${name}`,
-        text: `You received a new contact message from your portfolio.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `
-          <h2>New Portfolio Contact Message</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
-        `,
-      });
+      const result = await withTimeout(
+        mailTransporter.sendMail({
+          from: `My Folio Contact <${GMAIL_USER}>`,
+          to: CONTACT_RECEIVER_EMAIL,
+          replyTo: email,
+          subject: `New portfolio message from ${name}`,
+          text: `You received a new contact message from your portfolio.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+          html: `
+            <h2>New Portfolio Contact Message</h2>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Message:</strong></p>
+            <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
+          `,
+        }),
+        MAIL_TIMEOUT_MS,
+        "Email provider timeout. Please try again in a moment."
+      );
 
       logger.info("Contact email delivered successfully:", result.messageId);
       deliveredByEmail = true;

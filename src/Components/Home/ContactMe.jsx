@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../../styles/ContactMe.css";
 
 const SUCCESS_MESSAGE_TIMEOUT_MS = 4000;
+const REQUEST_TIMEOUT_MS = 20000;
 
 const ContactMe = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -36,13 +37,24 @@ const ContactMe = () => {
       setIsSubmitting(true);
       setStatus(null);
 
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => {
+        controller.abort();
+      }, REQUEST_TIMEOUT_MS);
+
+      let response;
+      try {
+        response = await fetch(`${apiBaseUrl}/api/contact`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+          signal: controller.signal,
+        });
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
 
       const data = await response.json();
 
@@ -58,7 +70,10 @@ const ContactMe = () => {
     } catch (error) {
       setStatus({
         type: "error",
-        text: error.message || "Something went wrong. Please try again.",
+        text:
+          error.name === "AbortError"
+            ? "Request timed out. Please try again in a moment."
+            : error.message || "Something went wrong. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
