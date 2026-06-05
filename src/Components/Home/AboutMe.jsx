@@ -12,32 +12,6 @@ const AboutMe = () => {
       </div>
 
       <div className="about-grid">
-        <div className="about-media">
-          <div className="about-media-hero">
-            <img
-              className="about-media-main"
-              src="/Reagan.png"
-              loading="lazy"
-              decoding="async"
-              alt="Portrait of Gilbert"
-            />
-          </div>
-          <div className="about-media-stack">
-            <img
-              src="/images/about-code.webp"
-              loading="lazy"
-              decoding="async"
-              alt="Close-up of code on a monitor"
-            />
-            <img
-              src="/images/about-workspace.webp"
-              loading="lazy"
-              decoding="async"
-              alt="Modern workspace setup"
-            />
-          </div>
-        </div>
-
         <div className="about-copy">
           <div className="about-card">
             <h3>Who I am</h3>
@@ -47,6 +21,13 @@ const AboutMe = () => {
               goals. I care about clear architecture, thoughtful UI decisions,
               and maintainable code that teams can scale.
             </p>
+            <img
+              className="about-workspace-image"
+              src="/Reagan.png"
+              loading="lazy"
+              decoding="async"
+              alt="Portrait of Gilbert"
+            />
           </div>
 
           <div className="about-card">
@@ -57,6 +38,13 @@ const AboutMe = () => {
               product requirements into fast, accessible, and production-ready
               solutions.
             </p>
+            <img
+              className="about-workspace-image"
+              src="/images/about-workspace.webp"
+              loading="lazy"
+              decoding="async"
+              alt="Workspace setup"
+            />
           </div>
         </div>
 

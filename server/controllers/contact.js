@@ -14,7 +14,10 @@ const DB_TIMEOUT_MS = 8000;
 const mailTransporter =
   GMAIL_USER && GMAIL_APP_PASSWORD
     ? nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        requireTLS: true,
         auth: {
           user: GMAIL_USER,
           pass: GMAIL_APP_PASSWORD,

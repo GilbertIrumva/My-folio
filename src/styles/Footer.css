@@ -1,6 +1,7 @@
 .footer {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  background: #1f4fc7;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px 24px 0 0;
   padding: 40px 10%;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .footer-socials a {
-  color: rgba(248, 251, 255, 0.82);
+  color: rgba(248, 251, 255, 0.78);
   font-size: 14px;
   display: inline-flex;
   align-items: center;
@@ -37,7 +38,7 @@
   padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(11, 16, 32, 0.08);
   transition: color 0.2s ease;
 }
 

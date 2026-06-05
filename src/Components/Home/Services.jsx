@@ -18,7 +18,7 @@ const services = [
   },
   {
     title: "Performance Optimization",
-    image: "/images/project-dashboard.webp",
+    image: "/images/project-reporting.webp",
     text: "Improve Core Web Vitals, technical SEO, and UX responsiveness to increase engagement, conversion, and retention.",
   },
 ];

@@ -152,18 +152,28 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .contact-grid {
     grid-template-columns: 1fr;
-    padding: 28px;
+    padding: 32px;
   }
 
   .contact-visual {
-    height: 170px;
+    height: 190px;
   }
 
   .contact-list li {
     grid-template-columns: 1fr;
     gap: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    padding: 28px;
+  }
+
+  .contact-visual {
+    height: 170px;
   }
 }
