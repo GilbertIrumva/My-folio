@@ -19,6 +19,9 @@ const GMAIL_USER = normalize(process.env.GMAIL_USER);
 const GMAIL_APP_PASSWORD = normalizeAppPassword(process.env.GMAIL_APP_PASSWORD);
 const CONTACT_RECEIVER_EMAIL =
   normalize(process.env.CONTACT_RECEIVER_EMAIL) || GMAIL_USER;
+const RESEND_API_KEY = normalize(process.env.RESEND_API_KEY);
+const RESEND_FROM_EMAIL =
+  normalize(process.env.RESEND_FROM_EMAIL) || "onboarding@resend.dev";
 
 export {
   PORT,
@@ -26,4 +29,6 @@ export {
   GMAIL_USER,
   GMAIL_APP_PASSWORD,
   CONTACT_RECEIVER_EMAIL,
+  RESEND_API_KEY,
+  RESEND_FROM_EMAIL,
 };
