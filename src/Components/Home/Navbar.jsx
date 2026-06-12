@@ -104,6 +104,9 @@ function Navbar() {
           onClick={toggleTheme}
         >
           {theme === "light" ? <SunIcon /> : <MoonIcon />}
+          <span className="theme-toggle-label">
+            {theme === "light" ? "Light" : "Dark"}
+          </span>
         </button>
       </div>
 
