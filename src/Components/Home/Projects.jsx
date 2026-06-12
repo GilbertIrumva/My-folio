@@ -11,7 +11,7 @@ const projects = [
       "Improved recruiter scanability by structuring content into projects, experience, services, and resume CTA sections with clear conversion paths.",
     ],
     stack: "Tech Stack: React, Vite, Node.js, Express, CSS",
-    demoUrl: "https://github.com/GilbertIrumva",
+    demoUrl: "https://gilbert-portfolio-n3wv.onrender.com/",
     repoUrl: "https://github.com/GilbertIrumva/My-folio",
   },
   {

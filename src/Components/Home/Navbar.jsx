@@ -103,7 +103,7 @@ function Navbar() {
           className="theme-toggle"
           onClick={toggleTheme}
         >
-          {theme === "light" ? <MoonIcon /> : <SunIcon />}
+          {theme === "light" ? <SunIcon /> : <MoonIcon />}
         </button>
       </div>
 
