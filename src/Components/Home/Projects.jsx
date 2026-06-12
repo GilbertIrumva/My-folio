@@ -15,17 +15,18 @@ const projects = [
     repoUrl: "https://github.com/GilbertIrumva/My-folio",
   },
   {
-    title: "E-Commerce Operations Dashboard",
-    image: "/images/project-dashboard.webp",
+    title: "ScholarshipZone – End-to-End Scholarship Management System",
+    image: "/images/demo.png",
     summary:
-      "Built an internal dashboard for order tracking, inventory visibility, and support workflows to help operations teams resolve issues faster.",
+      "Developed a scalable scholarship management platform that connects students with global funding opportunities while providing administrators with tools to manage applications, documents, and visa workflows.",
     achievements: [
-      "Reduced average order-resolution time by centralizing order, payment, and fulfillment status into one interface.",
-      "Improved team productivity with role-based views, search filters, and actionable status alerts.",
+      "Increased application efficiency through advanced scholarship search, saved opportunities, multi-step application forms, and automated progress tracking.",
+      "Implemented enterprise-grade security features including JWT authentication, refresh-token sessions, Google OAuth, TOTP-based 2FA, and encrypted document storage.",
+      "Built a comprehensive admin portal with applicant analytics, audit logging, notification management, and workflow automation.",
     ],
-    stack: "Tech Stack: React, TypeScript, Express, PostgreSQL, Chart.js",
-    demoUrl: "https://github.com/GilbertIrumva",
-    repoUrl: "https://github.com/GilbertIrumva",
+    stack: "Tech Stack: React, Vite, Express.js, MongoDB, Tailwind CSS, Docker, AWS S3/R2",
+    demoUrl: "https://scholarshipzone.onrender.com/",
+    repoUrl: "https://github.com/GilbertIrumva/scholarship-hub",
   },
   {
     title: "Client Reporting Automation Tool",
